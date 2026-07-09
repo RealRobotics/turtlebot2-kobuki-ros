@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.15)
 project(kobuki_node)
 
 find_package(ament_cmake_ros REQUIRED)
@@ -10,7 +10,7 @@ find_package(ecl_errors REQUIRED)
 find_package(ecl_exceptions REQUIRED)
 find_package(ecl_geometry REQUIRED)
 find_package(ecl_linear_algebra REQUIRED)
-find_package(ecl_sigslots REQUIRED)
+find_package(ecl_sigslots_lite REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(kobuki_core REQUIRED)
 find_package(kobuki_ros_interfaces REQUIRED)
@@ -52,7 +52,7 @@ target_link_libraries(kobuki_ros
   ecl_exceptions::ecl_exceptions
   ecl_geometry::ecl_geometry
   ecl_linear_algebra::ecl_linear_algebra
-  ecl_sigslots::ecl_sigslots
+  ecl_sigslots_lite::ecl_sigslots_lite
 )
 
 rclcpp_components_register_node(kobuki_ros
