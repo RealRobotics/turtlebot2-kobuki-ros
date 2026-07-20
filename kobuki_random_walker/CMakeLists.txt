@@ -23,6 +23,7 @@ add_library(kobuki_random_walker src/random_walker.cpp)
 target_include_directories(kobuki_random_walker PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>"
+  geometry_msgs
 )
 target_link_libraries(kobuki_random_walker
   geometry_msgs
