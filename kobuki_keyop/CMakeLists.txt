@@ -14,11 +14,12 @@ ecl_enable_cxx_warnings()
 include_directories(include)
 
 add_library(kobuki_keyop SHARED src/keyop.cpp)
-ament_target_dependencies(kobuki_keyop
-  "geometry_msgs"
-  "kobuki_ros_interfaces"
-  "rclcpp"
-  "rclcpp_components"
+
+target_link_libraries(kobuki_keyop
+  geometry_msgs
+  kobuki_ros_interfaces
+  rclcpp
+  rclcpp_components
 )
 
 rclcpp_components_register_node(kobuki_keyop

@@ -14,25 +14,16 @@
   <buildtool_depend>ament_cmake_ros</buildtool_depend>
 
   <!-- Ros -->
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>rclcpp</build_depend>
-  <build_depend>rclcpp_components</build_depend>
+  <depend>geometry_msgs</build>
+  <depend>rclcpp</build>
+  <depend>rclcpp_components</build>
 
   <!-- Ecl -->
   <build_depend>ecl_build</build_depend>
 
   <!-- Kobuki -->
-  <build_depend>kobuki_ros_interfaces</build_depend>
-
-
-  <!-- Ros -->
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>rclcpp</exec_depend>
-  <exec_depend>rclcpp_components</exec_depend>
-
-  <!-- Kobuki -->
+  <depend>kobuki_ros_interfaces</depend>
   <exec_depend>cmd_vel_mux</exec_depend>
-  <exec_depend>kobuki_ros_interfaces</exec_depend>
   <exec_depend>kobuki_velocity_smoother</exec_depend>
 
   <export>
