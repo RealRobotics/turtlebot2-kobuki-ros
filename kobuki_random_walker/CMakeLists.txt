@@ -19,16 +19,17 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 add_library(kobuki_random_walker src/random_walker.cpp)
+
 target_include_directories(kobuki_random_walker PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>"
 )
-ament_target_dependencies(kobuki_random_walker
-  "geometry_msgs"
-  "kobuki_ros_interfaces"
-  "rclcpp"
-  "rclcpp_components"
-  "std_msgs"
+target_link_libraries(kobuki_random_walker
+  geometry_msgs
+  kobuki_ros_interfaces
+  rclcpp
+  rclcpp_components
+  std_msgs
 )
 
 rclcpp_components_register_node(kobuki_random_walker
