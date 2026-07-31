@@ -25,13 +25,16 @@ target_include_directories(kobuki_random_walker PUBLIC
   "$<INSTALL_INTERFACE:include>"
   geometry_msgs
 )
+
 target_link_libraries(kobuki_random_walker
-  geometry_msgs
-  kobuki_ros_interfaces
-  rclcpp
-  rclcpp_components
-  std_msgs
+  geometry_msgs::geometry_msgs__rosidl_typesupport_cpp
+  std_msgs::std_msgs__rosidl_typesupport_cpp
+  kobuki_ros_interfaces::kobuki_ros_interfaces__rosidl_typesupport_cpp
+  rcl_interfaces::rcl_interfaces__rosidl_typesupport_cpp
+  rclcpp::rclcpp
+  rclcpp_components::component
 )
+
 
 rclcpp_components_register_node(kobuki_random_walker
   PLUGIN "kobuki_random_walker::RandomWalkerNode"
