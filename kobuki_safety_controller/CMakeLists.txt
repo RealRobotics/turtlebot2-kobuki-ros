@@ -15,12 +15,13 @@ ecl_enable_cxx_warnings()
 include_directories(include)
 
 add_library(kobuki_safety_controller SHARED src/safety_controller.cpp)
-ament_target_dependencies(kobuki_safety_controller
-  "geometry_msgs"
-  "kobuki_ros_interfaces"
-  "rclcpp"
-  "rclcpp_components"
-  "std_msgs"
+
+target_link_libraries(kobuki_safety_controller
+  geometry_msgs::geometry_msgs__rosidl_typesupport_cpp
+  std_msgs::std_msgs__rosidl_typesupport_cpp
+  kobuki_ros_interfaces::kobuki_ros_interfaces__rosidl_typesupport_cpp
+  rclcpp::rclcpp
+  rclcpp_components::component
 )
 
 rclcpp_components_register_node(kobuki_safety_controller

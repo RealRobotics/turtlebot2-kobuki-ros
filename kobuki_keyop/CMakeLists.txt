@@ -16,10 +16,10 @@ include_directories(include)
 add_library(kobuki_keyop SHARED src/keyop.cpp)
 
 target_link_libraries(kobuki_keyop
-  geometry_msgs
-  kobuki_ros_interfaces
-  rclcpp
-  rclcpp_components
+  geometry_msgs::geometry_msgs__rosidl_typesupport_cpp
+  kobuki_ros_interfaces::kobuki_ros_interfaces__rosidl_typesupport_cpp
+  rclcpp::rclcpp
+  rclcpp_components::component
 )
 
 rclcpp_components_register_node(kobuki_keyop

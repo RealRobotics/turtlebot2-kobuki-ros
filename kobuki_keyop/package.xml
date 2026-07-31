@@ -1,4 +1,4 @@
-<package format="2">
+<package format="3">
   <name>kobuki_keyop</name>
   <version>1.0.0</version>
   <description>
@@ -14,9 +14,9 @@
   <buildtool_depend>ament_cmake_ros</buildtool_depend>
 
   <!-- Ros -->
-  <depend>geometry_msgs</build>
-  <depend>rclcpp</build>
-  <depend>rclcpp_components</build>
+  <depend>geometry_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
 
   <!-- Ecl -->
   <build_depend>ecl_build</build_depend>

@@ -52,8 +52,9 @@ target_link_libraries(kobuki_ros
   rclcpp_components::component
   rclcpp_components::component_manager
   tf2::tf2
-  tf2_ros::static_transform_broadcaster_node
+  tf2_linear_math::tf2_linear_math
   tf2_ros::tf2_ros
+  tf2_ros::static_transform_broadcaster_node
 )
 
 rclcpp_components_register_node(kobuki_ros

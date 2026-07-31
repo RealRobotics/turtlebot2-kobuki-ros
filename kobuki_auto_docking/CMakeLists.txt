@@ -33,22 +33,20 @@ target_include_directories(kobuki_auto_docking PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>"
 )
-ament_target_dependencies(kobuki_auto_docking
-  "geometry_msgs"
-  "kobuki_core"
-  "kobuki_ros_interfaces"
-  "message_filters"
-  "nav_msgs"
-  "rcl_interfaces"
-  "rclcpp"
-  "rclcpp_components"
-  "rclcpp_action"
-  "std_msgs"
-  "tf2_geometry_msgs"
-  "tf2_ros"
-)
 target_link_libraries(kobuki_auto_docking
   ecl_linear_algebra::ecl_linear_algebra
+  rclcpp::rclcpp
+  rclcpp_components::component
+  kobuki_core::kobuki_core
+  message_filters::message_filters
+  rclcpp_action::rclcpp_action
+  geometry_msgs::geometry_msgs__rosidl_typesupport_cpp
+  kobuki_ros_interfaces::kobuki_ros_interfaces__rosidl_typesupport_cpp
+  std_msgs::std_msgs__rosidl_typesupport_cpp
+  nav_msgs::nav_msgs__rosidl_typesupport_cpp
+  rcl_interfaces::rcl_interfaces__rosidl_typesupport_cpp
+  tf2_geometry_msgs::tf2_geometry_msgs
+  tf2_ros::tf2_ros
 )
 
 rclcpp_components_register_node(kobuki_auto_docking
