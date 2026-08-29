@@ -43,6 +43,7 @@
 #include <unistd.h>
 
 #include <chrono>
+#include <cerrno>
 #include <cstring>
 #include <functional>
 #include <memory>
@@ -77,9 +78,21 @@ namespace kobuki_keyop
     last_zero_vel_sent_(true), // avoid zero-vel messages from the beginning
     power_status_(false),
     quit_requested_(false),
-    key_file_descriptor_(0)
+    key_file_descriptor_(STDIN_FILENO),
+    terminal_state_saved_(false)
   {
-    tcgetattr(key_file_descriptor_, &original_terminal_state_); // get terminal properties
+    if (::isatty(key_file_descriptor_) == 0)
+    {
+      RCLCPP_WARN(get_logger(), "Keyboard input disabled: stdin is not a terminal.");
+    }
+    else if (::tcgetattr(key_file_descriptor_, &original_terminal_state_) == 0)
+    {
+      terminal_state_saved_ = true;
+    }
+    else
+    {
+      RCLCPP_ERROR(get_logger(), "Failed to read terminal settings: %s", ::strerror(errno));
+    }
     cmd_ = std::make_shared<geometry_msgs::msg::Twist>();
 
     /*********************
@@ -123,7 +136,10 @@ namespace kobuki_keyop
     disable();
     quit_requested_ = true;
     thread_.join();
-    tcsetattr(key_file_descriptor_, TCSANOW, &original_terminal_state_);
+    if (terminal_state_saved_)
+    {
+      tcsetattr(key_file_descriptor_, TCSANOW, &original_terminal_state_);
+    }
   }
 
   /*****************************************************************************
@@ -165,14 +181,22 @@ namespace kobuki_keyop
     */
   void KeyOp::keyboardInputLoop()
   {
+    if (!terminal_state_saved_)
+    {
+      return;
+    }
+
     struct termios raw;
     std::memcpy(&raw, &original_terminal_state_, sizeof(struct termios));
 
     raw.c_lflag &= ~(ICANON | ECHO);
-    // Setting a new line, then end of file
-    raw.c_cc[VEOL] = 1;
-    raw.c_cc[VEOF] = 2;
-    tcsetattr(key_file_descriptor_, TCSANOW, &raw);
+    raw.c_cc[VMIN] = 1;
+    raw.c_cc[VTIME] = 0;
+    if (::tcsetattr(key_file_descriptor_, TCSANOW, &raw) != 0)
+    {
+      RCLCPP_ERROR(get_logger(), "Failed to configure terminal input: %s", ::strerror(errno));
+      return;
+    }
 
     puts("Reading from keyboard");
     puts("---------------------------");

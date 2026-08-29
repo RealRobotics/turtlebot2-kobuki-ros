@@ -122,6 +122,7 @@ private:
   void restoreTerminal();
   bool quit_requested_;
   int key_file_descriptor_;
+  bool terminal_state_saved_;
   struct termios original_terminal_state_;
   std::thread thread_;
 };
