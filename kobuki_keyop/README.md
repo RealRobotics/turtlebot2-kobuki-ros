@@ -7,8 +7,9 @@ ros2 run kobuki_keyop kobuki_keyop_node
 ```
 
 Publishing to different topics ((in this case `my_cmd_vel`)).
+
 ```sh
-ros2 run kobuki_keyop kobuki_keyop_node --ros-args --remap cmd_vel:=my_cmd_vel
+ros2 run kobuki_keyop kobuki_keyop_node --ros-args --remap commands/velocity:=my_cmd_vel
 ```
 
 __NOTE: There is no launch file for this package as the keyboard input is lost when launch files are used.__
